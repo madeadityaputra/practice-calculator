@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8" />
+		<title>calculator</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				min-height: 100vh;
+				background-color: #efefef;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.calculator {
+				width: 350px;
+				height: 490px;
+				box-shadow: 4px 4px 30px rgba(0, 0, 0, 0.3);
+				border-radius: 10px;
+				border: 1px solid black;
+			}
+
+			form input {
+				width: 327px;
+				height: 90px;
+				border: 1px solclass black;
+				border-radius: 8px;
+				margin: 10px;
+				font-size: 40px;
+				text-align: right;
+				color: black;
+				pointer-events: none;
+			}
+
+			button {
+				flex: 0 0 20%;
+				margin: 6px;
+				width: 70px;
+				height: 60px;
+				font-size: 25px;
+				font-weight: 600;
+				border-radius: 8px;
+				cursor: pointer;
+				border: 1px solid black;
+			}
+
+			.buttons {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-between;
+				padding: 10px;
+				cursor: pointer;
+			}
+
+			.btn-yellow {
+				background-color: yellow;
+			}
+
+			span .bigButtonEqual {
+				width: 150px;
+				height: 60px;
+				font-size: 25px;
+				font-weight: 600;
+				background-color: pink;
+				border-radius: 8px;
+				cursor: pointer;
+				border: 1px solid black;
+			}
+
+			span .bigButton {
+				width: 150px;
+				height: 60px;
+				font-size: 25px;
+				font-weight: 600;
+				background-color: yellow;
+				border-radius: 8px;
+				cursor: pointer;
+				border: 1px solid black;
+			}
+		</style>
+	</head>
+	<body>
+		<section class="calculator">
+			<form>
+				<input type="text" class="screen" />
+			</form>
+
+			<div class="buttons">
+				<span>
+					<button type="button" class="bigButton">C</button>
+				</span>
+				<button type="button" class="btn a" data-num=".">.</button>
+				<button type="button" class="btn btn-yellow" data-num="/">/</button>
+				<button type="button" class="btn a" data-num="9">9</button>
+				<button type="button" class="btn a" data-num="8">8</button>
+				<button type="button" class="btn a" data-num="7">7</button>
+				<button type="button" class="btn btn-yellow" data-num="*">*</button>
+				<button type="button" class="btn a" data-num="6">6</button>
+				<button type="button" class="btn a" data-num="5">5</button>
+				<button type="button" class="btn a" data-num="4">4</button>
+				<button type="button" class="btn btn-yellow" data-num="+">+</button>
+				<button type="button" class="btn a" data-num="3">3</button>
+				<button type="button" class="btn a" data-num="2">2</button>
+				<button type="button" class="btn a" data-num="1">1</button>
+				<button type="button" class="btn btn-yellow" data-num="-">-</button>
+				<button type="button" class="btn a" data-num="0">0</button>
+				<button type="button" class="btn a" data-num="00">00</button>
+				<span>
+					<button type="button" class="bigButtonEqual">=</button>
+				</span>
+			</div>
+		</section>
+
+		<script>
+			(function () {
+				let screen = document.querySelector(".screen");
+				let buttons = document.querySelectorAll(".btn");
+				let clear = document.querySelector(".bigButton");
+				let equal = document.querySelector(".bigButtonEqual");
+
+				buttons.forEach(function (button) {
+					button.addEventListener("click", function (e) {
+						let value = e.target.dataset.num;
+						screen.value += value;
+					});
+				});
+
+				equal.addEventListener("click", function (e) {
+					if (screen.value === "") {
+						screen.value = "please enter";
+					} else {
+						let answer = eval(screen.value);
+						screen.value = answer;
+					}
+				});
+
+				clear.addEventListener("click", function (e) {
+					screen.value = "";
+				});
+			})();
+		</script>
+	</body>
+</html>
